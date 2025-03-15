@@ -15,8 +15,8 @@ const AppRoutes: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Navigate to="/" replace />} />
         <Route path="/editor/:id?" element={<Editor />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/tools/cover-generator" element={<CoverGeneratorPage />} />
