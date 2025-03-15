@@ -33,3 +33,4 @@ yarn-error.log*
 *.sw? 
 # Local Netlify folder
 .netlify
+client/.env.production
