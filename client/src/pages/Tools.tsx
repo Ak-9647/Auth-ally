@@ -31,7 +31,7 @@ const Tools: React.FC = () => {
             </div>
             <h2 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">AI Text Completion</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Generate contextually relevant continuations of your writing to overcome writer's block.
+              Generate contextually relevant continuations of your writing to overcome writer&apos;s block.
             </p>
             <Link 
               to="/editor/new?tool=ai-completion" 

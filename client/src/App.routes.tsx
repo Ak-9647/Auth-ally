@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { RequireAuth } from './components/auth/RequireAuth';
 
 // Pages
 import Dashboard from './pages/Dashboard';
@@ -15,12 +16,33 @@ const AppRoutes: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Dashboard />} />
         <Route path="/dashboard" element={<Navigate to="/" replace />} />
-        <Route path="/editor/:id?" element={<Editor />} />
-        <Route path="/tools" element={<Tools />} />
-        <Route path="/tools/cover-generator" element={<CoverGeneratorPage />} />
-        <Route path="/settings" element={<Settings />} />
+        
+        {/* Protected routes */}
+        <Route path="/editor/:id?" element={
+          <RequireAuth>
+            <Editor />
+          </RequireAuth>
+        } />
+        <Route path="/tools" element={
+          <RequireAuth>
+            <Tools />
+          </RequireAuth>
+        } />
+        <Route path="/tools/cover-generator" element={
+          <RequireAuth>
+            <CoverGeneratorPage />
+          </RequireAuth>
+        } />
+        <Route path="/settings" element={
+          <RequireAuth>
+            <Settings />
+          </RequireAuth>
+        } />
+        
+        {/* 404 route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

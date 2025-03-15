@@ -1,144 +1,119 @@
-# Author-Ally: AI-Enhanced Writing Editor
+# Author-Ally
 
-## Overview
-
-Author-Ally is a sophisticated writing platform designed to enhance the writing experience through AI assistance, automatic saving, and a distraction-free environment. The application helps writers overcome creative blocks, improve their writing quality, and manage their work efficiently.
-
-![Author-Ally Logo](https://via.placeholder.com/800x400/2563eb/ffffff?text=Author-Ally)
+Author-Ally is a modern writing platform designed to help authors create, manage, and enhance their writing projects. It features AI-assisted writing tools, document management, and book cover generation capabilities.
 
 ## Features
 
-- **Distraction-Free Editor** with real-time auto-save functionality
-- **AI-Powered Writing Assistance** including text completion and rewriting suggestions
-- **Speech-to-Text Dictation** with multi-language support
-- **Book Cover Generation** based on your book's details
-- **Collaboration Tools** for sharing and co-editing documents
-- **Export Capabilities** to PDF and ePub formats
-- **Writing Analytics** with readability scoring and productivity tracking
-- **Light/Dark Mode** with system preference detection
+- **Document Management**: Create, edit, and organize your writing projects
+- **AI-Assisted Writing**: Get help with writer's block and generate ideas
+- **Speech-to-Text**: Dictate your writing for a hands-free experience
+- **Book Cover Generator**: Create professional book covers for your manuscripts
+- **User Authentication**: Secure user accounts with Clerk
+- **Real-time Data Sync**: Powered by Convex backend
+
+## Tech Stack
+
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Convex (real-time backend)
+- **Authentication**: Clerk
+- **Deployment**: Netlify
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- npm (v8 or higher)
-- Modern web browser (Chrome, Firefox, Edge, or Safari recommended)
+- Node.js (v14 or higher)
+- npm or yarn
 
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/author-ally.git
+   ```
+   git clone https://github.com/yourusername/author-ally.git
    cd author-ally
    ```
 
 2. Install dependencies:
-   ```bash
-   cd client
+   ```
    npm install
    ```
 
-3. Start the development server:
-   ```bash
-   npm start
+3. Set up environment variables:
+   Create a `.env` file in the client directory with the following variables:
+   ```
+   VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   VITE_CONVEX_URL=your_convex_url
    ```
 
-4. Open your browser and navigate to `http://localhost:3000`
+4. Start the development server:
+   ```
+   npm run dev
+   ```
+
+5. In a separate terminal, start the Convex development server:
+   ```
+   npx convex dev
+   ```
 
 ## Project Structure
 
-```
-author-ally/
-├── client/                  # Frontend application
-│   ├── public/              # Static assets
-│   ├── src/                 # Source code
-│   │   ├── components/      # React components
-│   │   ├── context/         # React context providers
-│   │   ├── pages/           # Page components
-│   │   ├── services/        # Service modules
-│   │   ├── tests/           # Test files
-│   │   ├── utils/           # Utility functions
-│   │   └── ...              # Other source files
-│   └── ...                  # Configuration files
-├── docs/                    # Documentation
-│   ├── api_requirements.md  # API requirements
-│   ├── deployment_guide.md  # Deployment instructions
-│   ├── developer_guide.md   # Developer documentation
-│   ├── requirements.md      # Project requirements
-│   ├── technical_architecture.md # Technical architecture
-│   ├── technical_challenges.md # Technical challenges
-│   ├── ui_flow.md           # UI flow documentation
-│   └── user_guide.md        # User documentation
-└── README.md                # This file
-```
+- `/client`: React frontend application
+  - `/src`: Source code
+    - `/components`: Reusable UI components
+    - `/pages`: Page components
+    - `/services`: Service modules for API interactions
+    - `/utils`: Utility functions
+- `/convex`: Convex backend
+  - `/schema.ts`: Database schema
+  - `/documents.ts`: Document-related functions
+  - `/bookCovers.ts`: Book cover-related functions
+  - `/users.ts`: User management functions
+  - `/http.ts`: HTTP endpoints for webhooks
 
-## Technology Stack
+## Authentication Flow
 
-- **Frontend**: React with TypeScript
-- **UI Components**: ShadCN UI with Radix UI primitives
-- **Styling**: Tailwind CSS
-- **State Management**: React Context API
-- **Routing**: React Router
-- **Export**: jsPDF
-- **Icons**: Lucide React
+1. User signs in using Clerk
+2. Clerk webhook notifies Convex of user creation/updates
+3. Convex creates/updates user record in the database
+4. User can access their documents and book covers
 
-## Documentation
+## Data Models
 
-Comprehensive documentation is available in the `docs` directory:
+### User
+- `_id`: Unique identifier
+- `clerkId`: ID from Clerk authentication
+- `email`: User's email address
+- `name`: User's name
 
-- [User Guide](docs/user_guide.md) - Instructions for using the application
-- [Developer Guide](docs/developer_guide.md) - Technical documentation for developers
-- [Deployment Guide](docs/deployment_guide.md) - Instructions for deploying the application
+### Document
+- `_id`: Unique identifier
+- `userId`: Reference to user
+- `title`: Document title
+- `content`: Document content
+- `createdAt`: Creation timestamp
+- `updatedAt`: Last update timestamp
 
-## Testing
-
-The application includes comprehensive test coverage:
-
-- Unit tests for all components
-- Integration tests for feature interactions
-- Accessibility tests
-- Browser compatibility tests
-- Performance tests
-
-To run tests:
-
-```bash
-cd client
-npm test
-```
+### BookCover
+- `_id`: Unique identifier
+- `userId`: Reference to user
+- `title`: Book title
+- `author`: Author name
+- `genre`: Book genre
+- `description`: Book description
+- `style`: Cover style
+- `imageUrl`: URL to the generated cover image
 
 ## Deployment
 
-Author-Ally can be deployed to various platforms:
-
-- Static hosting services (Netlify, Vercel, GitHub Pages)
-- Traditional web hosting
-- Docker containers
-
-See the [Deployment Guide](docs/deployment_guide.md) for detailed instructions.
-
-## Future Enhancements
-
-Planned future enhancements include:
-
-- Cloud synchronization across devices
-- Advanced collaborative editing
-- Mobile application
-- Integration with publishing platforms
-- Enhanced AI capabilities for specific genres
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+The application is deployed on Netlify with continuous deployment from the main branch.
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+## Acknowledgements
 
-- ShadCN UI for the component library
-- Tailwind CSS for the styling framework
-- React team for the amazing frontend library
-- All the writers who provided feedback during development
+- [Convex](https://www.convex.dev/) for the real-time backend
+- [Clerk](https://clerk.dev/) for authentication
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [React](https://reactjs.org/) for the frontend framework

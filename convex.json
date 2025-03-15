@@ -1,0 +1,12 @@
+{
+  "project": "author-ally",
+  "team": "ak-9647",
+  "prodUrl": "https://formal-cuttlefish-9.convex.cloud",
+  "functions": {
+    "http": {
+      "clerk-webhook": {
+        "public": true
+      }
+    }
+  }
+} 

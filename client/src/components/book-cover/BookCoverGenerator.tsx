@@ -3,7 +3,16 @@ import CoverGeneratorService from '../../services/CoverGeneratorService';
 import { Link } from 'react-router-dom';
 
 interface BookCoverGeneratorProps {
-  onCoverGenerated: (imageUrl: string) => void;
+  onCoverGenerated: (
+    imageUrl: string, 
+    coverData: {
+      title: string;
+      author: string;
+      genre: string;
+      description?: string;
+      style: string;
+    }
+  ) => void;
 }
 
 const BookCoverGenerator: React.FC<BookCoverGeneratorProps> = ({ onCoverGenerated }) => {
@@ -45,7 +54,13 @@ const BookCoverGenerator: React.FC<BookCoverGeneratorProps> = ({ onCoverGenerate
   };
   
   const handleSelectCover = (imageUrl: string) => {
-    onCoverGenerated(imageUrl);
+    onCoverGenerated(imageUrl, {
+      title,
+      author,
+      genre,
+      description,
+      style
+    });
   };
   
   return (
