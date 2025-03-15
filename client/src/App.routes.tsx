@@ -13,6 +13,7 @@ import CoverGeneratorPage from './pages/CoverGenerator';
 import Goals from './pages/Goals';
 import Collaboration from './pages/Collaboration';
 import Export from './pages/Export';
+import Developer from './pages/Developer';
 
 // Layout components will be imported here once created
 
@@ -23,6 +24,9 @@ const AppRoutes: React.FC = () => {
         {/* All routes wrapped in MainLayout for consistent navigation */}
         <Route element={<MainLayout><Dashboard /></MainLayout>} path="/" />
         <Route path="/dashboard" element={<Navigate to="/" replace />} />
+        
+        {/* Developer profile page - public access */}
+        <Route path="/developer" element={<Developer />} />
         
         {/* Protected routes */}
         <Route path="/editor/:id?" element={
